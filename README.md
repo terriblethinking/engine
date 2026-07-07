@@ -1,5 +1,7 @@
 # agent
 
+[docs](https://deepwiki.com/loeclos/nixvim)
+
 ## intro
 
 this is the starting point for the agentic harness terrible thinking is going to create.
