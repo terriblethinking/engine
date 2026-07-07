@@ -5,7 +5,7 @@ import (
 
 	"slices"
 
-	"github.com/maximhq/bifrost/core"
+	bifrost "github.com/maximhq/bifrost/core"
 	"github.com/maximhq/bifrost/core/schemas"
 )
 
@@ -61,7 +61,7 @@ func (a *Agent) Run(ctx context.Context, message string) (*schemas.BifrostChatRe
 	return response, nil
 }
 
-func (a *Agent) RunAsync(ctx context.Context, message string) <-chan any {
+func (a *Agent) RunAsync(ctx schemas.BifrostContext, message string) <-chan any {
 	chunkChan := make(chan any, 100)
 
 	if len(a.ToolSchemas) != len(a.Tools) {
@@ -156,7 +156,7 @@ func (a *Agent) RunAsync(ctx context.Context, message string) <-chan any {
 									// that, it will then run the tool and return the
 									// result through chunkChan which we provided.
 
-									go ToolManager(toolChunk, a.Tools[*tool.Function.Name], chunkChan)
+									go ToolManager(ctx, toolChunk, a.Tools[*tool.Function.Name], tool, chunkChan)
 
 									// After passing the tool into ToolManager, we can send
 									// it off to the client through chunkChan
@@ -203,7 +203,7 @@ func (a *Agent) RunAsync(ctx context.Context, message string) <-chan any {
 									// that, it will then run the tool and return the
 									// result through chunkChan which we provided.
 
-									go ToolManager(toolChunk, a.Tools[*tool.Function.Name], chunkChan)
+									go ToolManager(ctx, toolChunk, a.Tools[*tool.Function.Name], tool, chunkChan)
 
 									// After passing the tool into ToolManager, we can send
 									// it off to the client through chunkChan
