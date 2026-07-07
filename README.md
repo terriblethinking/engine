@@ -1,6 +1,6 @@
-# agent
+# engine
 
-[docs](https://deepwiki.com/loeclos/nixvim)
+[docs](https://deepwiki.com/loeclos/engine)
 
 ## intro
 
